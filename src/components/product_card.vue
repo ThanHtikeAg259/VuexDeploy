@@ -1,7 +1,7 @@
 <template>
   <div class="col-3 mt-3">
     <div class="card h-100 text-left">
-      <img :src="product.image" alt="" class="w-100">
+      <img :src="product.image" alt="" class="w-100 h-50">
       <div class="card-body">
         <h4 class="card-title">
           <router-link :to="{name: 'product', params: {id: product.id}}">{{ product.title }}</router-link>
@@ -17,12 +17,15 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
   export default {
     props: ["product"],
 
     methods: {
-      AddToCart(){
-        this.$store.dispatch('AddProductToCart', {
+      ...mapActions("cart", ["AddProductToCart"]),
+
+      AddToCart() {
+        this.AddProductToCart({
           product: this.product,
           quantity: 1
         })
@@ -32,4 +35,12 @@
 </script>
 
 <style>
+  .card-text,
+  .card-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 </style>

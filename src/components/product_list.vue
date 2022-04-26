@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import ProductCard from './product_card.vue'
   export default {
     components: {
@@ -12,14 +13,29 @@ import ProductCard from './product_card.vue'
     },
 
     computed: {
-      productsC() {
-        return this.$store.state.productsS;
-      }
+      ...mapState({
+        productsC: (state) => state.product.productsS
+      })
     },
 
-    mounted() {
-      this.$store.dispatch('GetAllProduct');
-    }
+    methods: {
+      ...mapActions({
+        getData: 'GetAllProduct'
+      })
+    },
+
+    async mounted() {
+      
+      this.getData()
+      console.log(1);
+      await setTimeout(() => {
+        console.log(2);
+      }, 3000);      
+      console.log(3);
+      
+      // this.$store.dispatch('GetAllProduct');
+      // console.log("product:" , this.productsC);
+    },
   }
 </script>
 

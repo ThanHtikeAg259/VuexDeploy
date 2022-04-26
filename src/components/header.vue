@@ -10,7 +10,7 @@
         <div>
           <div class="dropdown open">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">{{ cartCount }} Cart</button>
+              aria-haspopup="true" aria-expanded="false">{{ cartItemCount }} Cart</button>
             <div @click="$event.stopPropagation()">
               <mini-cart />
             </div>
@@ -30,9 +30,7 @@
     },
 
     computed: {
-      ...mapGetters({
-        cartCount: "cartItemCount"
-      })
+      ...mapGetters("cart", ["cartItemCount"])
     }
   };
 </script>
